@@ -1,4 +1,4 @@
-# Hypermap Registry for administrators
+# Hypermap Registry Architecture
 
 ## Integration within a Django project
 
@@ -154,7 +154,7 @@ If you want to see how to install those services, refer to "Manual Installations
 
 ### Django app
 
-The application layer [#TODO: provide more info here] 
+The application layer [#TODO: provide more info here]
 
 The app can be hosted via wsgi application located here: `hypermap/wsgi.py` for production enviroment is recommended to host it with uWSGI application server. Refer to https://uwsgi-docs.readthedocs.io/en/latest/ to more documentation.
 
@@ -189,7 +189,7 @@ Download metadata from Internet, each time an Endpoint, Service and Layer is cre
 
 Kicks off tasks at regular intervals, two important periodic tasks are placed in the settings file:
 
-Once a Layers are created, and checked with `hypermap.aggregator.tasks.check_all_services` are inserted to Memcached to store a buffer for the task `hypermap.aggregator.tasks.index_cached_layers` where a batch call is made to Search engine in order to index. 
+Once a Layers are created, and checked with `hypermap.aggregator.tasks.check_all_services` are inserted to Memcached to store a buffer for the task `hypermap.aggregator.tasks.index_cached_layers` where a batch call is made to Search engine in order to index.
 
 
 ***Important settings***

@@ -1,4 +1,4 @@
-# Create layers from endpoint
+# Tutorial
 
 In HHypermap Registry it is possible to harvest map services (OGC and ESRI REST) in different ways. You can create services using a single endpoint or creating a list of endpoints. An endpoint could be defined as a server's url address of services required for harvesting.
 
