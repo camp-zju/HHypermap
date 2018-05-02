@@ -123,29 +123,32 @@ class SolrHypermap(object):
         # now the other fields
         fields = [
             {"name": "abstract", "type": "string"},
-            {"name": "area", "type": "tdouble"},
+            {"name": "abstract_txt", "type": "string"},
+            {"name": "area", "type": "pdouble"},
             {"name": "availability", "type": "string"},
             {"name": "bbox", "type": "location_rpt_quad_5m"},
             {"name": "domain_name", "type": "string"},
-            {"name": "id", "type": "tlong", "required": True},
+            {"name": "id", "type": "plong", "required": True},
             {"name": "is_public", "type": "boolean"},
             {"name": "is_valid", "type": "boolean"},
             {"name": "last_status", "type": "boolean"},
             {"name": "layer_category", "type": "string"},
             {"name": "layer_date", "type": "tdate", "docValues": True},
             {"name": "layer_datetype", "type": "string"},
-            {"name": "layer_id", "type": "tlong"},
+            {"name": "layer_id", "type": "plong"},
             {"name": "layer_originator", "type": "string"},
+            {"name": "layer_originator_txt", "type": "string"},
             {"name": "layer_username", "type": "string"},
+            {"name": "layer_username_txt", "type": "string"},
             {"name": "location", "type": "string"},
-            {"name": "max_x", "type": "tdouble"},
-            {"name": "max_y", "type": "tdouble"},
-            {"name": "min_x", "type": "tdouble"},
-            {"name": "min_y", "type": "tdouble"},
+            {"name": "max_x", "type": "pdouble"},
+            {"name": "max_y", "type": "pdouble"},
+            {"name": "min_x", "type": "pdouble"},
+            {"name": "min_y", "type": "pdouble"},
             {"name": "name", "type": "string"},
-            {"name": "recent_reliability", "type": "tdouble"},
-            {"name": "reliability", "type": "tdouble"},
-            {"name": "service_id", "type": "tlong"},
+            {"name": "recent_reliability", "type": "pdouble"},
+            {"name": "reliability", "type": "pdouble"},
+            {"name": "service_id", "type": "plong"},
             {"name": "service_type", "type": "string"},
             {"name": "srs", "type": "string", "multiValued": True},
             {"name": "tile_url", "type": "string"},
@@ -153,8 +156,16 @@ class SolrHypermap(object):
             {"name": "type", "type": "string"},
             {"name": "url", "type": "string"},
             {"name": "uuid", "type": "string", "required": True},
-            {"name": "centroid_y", "type": "tdouble"},
-            {"name": "centroid_x", "type": "tdouble"},
+            {"name": "centroid_y", "type": "pdouble"},
+            {"name": "centroid_x", "type": "pdouble"},
+        ]
+
+        copy_fields = [
+            {"source": "*", "dest": "_text_"},
+            {"source": "title", "dest": "title_txt"},
+            {"source": "abstract", "dest": "abstract_txt"},
+            {"source": "layer_originator", "dest": "layer_originator_txt"},
+            {"source": "layer_username", "dest": "layer_username_txt"},
         ]
 
         headers = {
@@ -165,4 +176,11 @@ class SolrHypermap(object):
             data = {
                 "add-field": field
             }
+            requests.post(schema_url, json=data, headers=headers)
+
+        for field in copy_fields:
+            data = {
+                "add-copy-field": field
+            }
+            print data
             requests.post(schema_url, json=data, headers=headers)
