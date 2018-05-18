@@ -55,7 +55,7 @@ Install and start Solr, and create the hypermap schema:
 
 ```sh
 cd /opt
-sudo wget http://archive.apache.org/dist/lucene/solr/6.6.2/solr-6.6.2.tgz
+sudo wget http://archive.apache.org/dist/lucene/solr/7.3.0/solr-7.3.0.tgz
 sudo tar xzf solr-7.3.0.tgz solr-7.3.0/bin/install_solr_service.sh --strip-components=2
 sudo ./install_solr_service.sh solr-7.3.0.tgz
 sudo -u solr solr/bin/solr create -c hypermap
